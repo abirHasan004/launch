@@ -1,27 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import LLCForm from "./components/LLCFormation.jsx";
-import LLCIncluded from './components/LLCIncluded.jsx'
-import TestimonialCarousel from './components/TestimonialCarousel.jsx'
-import LLCFeaturesSection from './components/LLCFeatures.jsx'
-import Footer from './components/Footer.jsx'
-import ThreeStepSection from './components/ThreeStepSection.jsx'
-import {Box} from '@mui/material'
-function App() {
-  const [count, setCount] = useState(0)
+import { Suspense, lazy, useState } from 'react';
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom';
 
-  return (
-    <Box sx={{p:0,minWidth:'100%'}}>
-      <LLCForm/>
-      <LLCIncluded/>
-      <TestimonialCarousel/>
-      <LLCFeaturesSection/>
-      <ThreeStepSection/>
-      <Footer/>
-    </Box>
+import './App.css';
+import HomePage from './Screens/HomePage.jsx';
+
+const LazyBusinessForm = lazy(() => import('./Screens/BusinessForm.jsx'));
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+    <Route path="/" element={<HomePage />}>
+    
+    </Route>   
+    <Route
+        path="/business-form"
+        element={
+          <Suspense fallback={<div>Loading form...</div>}>
+            <LazyBusinessForm />
+          </Suspense>
+        }
+      /></>
   )
+);
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;

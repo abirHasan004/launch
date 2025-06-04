@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { FaRocket } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
-
+import { useNavigate } from 'react-router-dom';
 const steps = [
   { number: 1, text: 'Select your State' },
   { number: 2, text: 'Submit your business details' },
@@ -24,7 +24,7 @@ const steps = [
 const LLCForm = () => {
   const [state, setState] = React.useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const navigate=useNavigate()
   const handleChange = (event) => {
     setState(event.target.value);
   };
@@ -124,6 +124,7 @@ const LLCForm = () => {
           <Button
             variant="contained"
             size="large"
+            onClick={()=>navigate('/business-form')}
             sx={{
               backgroundColor: 'red',
               color: '#fff',
