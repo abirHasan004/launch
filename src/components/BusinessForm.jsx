@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { loadStripe } from '@stripe/stripe-js';
 
 // Material UI Icons (Import the ones you need)
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
@@ -74,13 +75,50 @@ const BusinessForm = () => {
     filingSpeed: 'standard',
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log('Business Form Data:', values);
-    setTimeout(() => {
-      alert('Business details submitted! (Check console for data)');
-      setSubmitting(false);
-    }, 1000);
+ 
+  const stripePromise = loadStripe('pk_test_51OSP8aDveVeGQ2eWXx6zkeKcL3tXCaUn6qjpUA04ZUQ8uKHkm0JdXcRvRcv0haXiOsp19mNJBBXviwJjJzTuCzcp00Mv1xtSm8');
+  
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+    console.log('Submitting Form Data:', values);
+    setSubmitting(true);
+
+    try {
+      
+      const response = await fetch('https://lauchbackend-31561078355.europe-west1.run.app/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),  
+      });
+
+      if (!response.ok) {
+        throw new Error('Server responded with an error.');
+      }
+
+      const session = await response.json();
+
+   
+      const stripe = await stripePromise;
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+   
+         
+        console.error(result.error.message);
+        setErrors({ submit: result.error.message });
+      }
+    } catch (error) {
+      console.error('Error during submission:', error);
+      // Display a generic error on the form
+      setErrors({ submit: 'Submission failed. Please try again.' });
+      setSubmitting(false); // Allow user to try again if submission fails before redirect
+    }
+    // No need to setSubmitting(false) on success, as the user is navigating away.
   };
+  
 
   // Styles for static FormLabel
   const formLabelStyles = {

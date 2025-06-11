@@ -8,8 +8,9 @@ import {
 
 import './App.css';
 import HomePage from './Screens/HomePage.jsx';
-
+import {PaymentCancel,PaymentSuccess} from './components/StripePaymentInfro.jsx'
 const LazyBusinessForm = lazy(() => import('./Screens/BusinessForm.jsx'));
+import Footer from './components/Footer.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,7 +25,26 @@ const router = createBrowserRouter(
             <LazyBusinessForm />
           </Suspense>
         }
-      /></>
+      />
+       <Route
+        path="/success"
+        element={
+          <Suspense fallback={<div>Loading form...</div>}>
+            <PaymentSuccess />
+            <Footer/>
+          </Suspense>
+        }
+      />
+        <Route
+        path="/cancel"
+        element={
+          <Suspense fallback={<div>Loading form...</div>}>
+            <PaymentCancel />
+            <Footer/>
+          </Suspense>
+        }
+      />
+      </>
   )
 );
 
