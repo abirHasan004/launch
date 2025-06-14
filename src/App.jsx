@@ -11,40 +11,58 @@ import HomePage from './Screens/HomePage.jsx';
 import {PaymentCancel,PaymentSuccess} from './components/StripePaymentInfro.jsx'
 const LazyBusinessForm = lazy(() => import('./Screens/BusinessForm.jsx'));
 import Footer from './components/Footer.jsx'
+import { CircularProgress, Box } from '@mui/material';
+const Loader = () => (
+  <Box
+    sx={{
+      height: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}
+  >
+    <CircularProgress />
+  </Box>
+);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-    <Route path="/" element={<HomePage />}>
-    
-    </Route>   
-    <Route
+      <Route path="/" element={<HomePage />} />
+
+      <Route
         path="/business-form"
         element={
-          <Suspense fallback={<div>Loading form...</div>}>
+          <Suspense fallback={<Loader />}>
             <LazyBusinessForm />
           </Suspense>
         }
       />
-       <Route
+
+      <Route
         path="/success"
         element={
-          <Suspense fallback={<div>Loading form...</div>}>
-            <PaymentSuccess />
-            <Footer/>
+          <Suspense fallback={<Loader />}>
+            <>
+              <PaymentSuccess />
+              <Footer />
+            </>
           </Suspense>
         }
       />
-        <Route
+
+      <Route
         path="/cancel"
         element={
-          <Suspense fallback={<div>Loading form...</div>}>
-            <PaymentCancel />
-            <Footer/>
+          <Suspense fallback={<Loader />}>
+            <>
+              <PaymentCancel />
+              <Footer />
+            </>
           </Suspense>
         }
       />
-      </>
+    </>
   )
 );
 

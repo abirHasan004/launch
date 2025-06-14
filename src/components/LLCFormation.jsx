@@ -38,7 +38,19 @@ const LLCForm = () => {
   };
 
   const menuItems = ['Home', 'Services', 'Pricing', 'Contact'];
-
+  const usStates = [
+    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
+    "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho",
+    "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
+    "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
+    "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada",
+    "New Hampshire", "New Jersey", "New Mexico", "New York",
+    "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon",
+    "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
+    "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
+    "West Virginia", "Wisconsin", "Wyoming"
+  ];
+  
   return (
     <Box sx={{ background: 'linear-gradient(#fce8d3, #fff)', minHeight: '100%', p: 4 }}>
       {/* Top Bar */}
@@ -109,16 +121,20 @@ const LLCForm = () => {
             </Paper>
           ))}
 
-          {/* Dropdown */}
-          <FormControl fullWidth sx={{ mb: 2 }}>
-            <InputLabel>Choose your LLC State</InputLabel>
-            <Select value={state} label="Choose your LLC State" onChange={handleChange}>
-              <MenuItem value="California">California</MenuItem>
-              <MenuItem value="Texas">Texas</MenuItem>
-              <MenuItem value="New York">New York</MenuItem>
-              {/* Add more states if needed */}
-            </Select>
-          </FormControl>
+        <FormControl fullWidth sx={{ mb: 2 }}>
+          <InputLabel>Choose your LLC State</InputLabel>
+          <Select
+            value={state}
+            label="Choose your LLC State"
+            onChange={handleChange}
+          >
+            {usStates.map((stateName) => (
+              <MenuItem key={stateName} value={stateName}>
+                {stateName}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
           {/* Get Started Button */}
           <Button
