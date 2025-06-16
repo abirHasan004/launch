@@ -8,13 +8,11 @@ import {
   FormControl,
   InputLabel,
   Paper,
-  Grid,
-  IconButton,
-  Menu
+  Grid
 } from '@mui/material';
-import { FaRocket } from 'react-icons/fa';
-import { FiMenu } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
+
 const steps = [
   { number: 1, text: 'Select your State' },
   { number: 2, text: 'Submit your business details' },
@@ -23,21 +21,12 @@ const steps = [
 
 const LLCForm = () => {
   const [state, setState] = React.useState('');
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  
   const handleChange = (event) => {
     setState(event.target.value);
   };
 
-  const handleMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  const menuItems = ['Home', 'Services', 'Pricing', 'Contact'];
   const usStates = [
     "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
     "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho",
@@ -53,34 +42,7 @@ const LLCForm = () => {
   
   return (
     <Box sx={{ background: 'linear-gradient(#fce8d3, #fff)', minHeight: '100%', p: 4 }}>
-      {/* Top Bar */}
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Box display="flex" alignItems="center" gap={1}>
-          <FaRocket color="red" size={28} />
-          <Typography variant="h5" fontWeight="bold">
-            LAUNCH
-          </Typography>
-        </Box>
-
-        <IconButton onClick={handleMenuClick}>
-          <FiMenu size={24} />
-        </IconButton>
-
-        {/* Dropdown Menu */}
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleMenuClose}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        >
-          {menuItems.map((item, index) => (
-            <MenuItem key={index} onClick={handleMenuClose}>
-              {item}
-            </MenuItem>
-          ))}
-        </Menu>
-      </Box>
+      <Navbar />
 
       {/* Main Content */}
       <Grid container spacing={4} mt={4} alignItems="center" justifyContent="center">

@@ -13,6 +13,7 @@ export default function ThreeStepSection() {
       <Box sx={{ textAlign: 'center', mb: 4 }}>
         <Button
           variant="contained"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           sx={{
             backgroundColor: '#e53935',
             borderRadius: 10,

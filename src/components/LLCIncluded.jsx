@@ -63,6 +63,8 @@ const LLCIncluded = () => {
 
       <Button
         variant="contained"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+
         sx={{
           mt: 4,
           backgroundColor: "#f00",

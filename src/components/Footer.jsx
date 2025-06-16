@@ -61,7 +61,7 @@ const Footer = () => {
       }}
     >
       <Container maxWidth="xll">
-        <Grid container spacing={4} alignItems="flex-start">
+        <Grid container spacing={4} alignItems="flex-center">
           {/* Column 1: Logo and Address */}
           <Grid item xs={12} md={4}>
             <Box sx={{ mb: 2 }}>
