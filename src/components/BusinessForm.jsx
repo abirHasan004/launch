@@ -31,7 +31,7 @@ import { Formik, Form, FieldArray, Field } from 'formik';
 import * as Yup from 'yup';
 import { loadStripe } from 'https://esm.sh/@stripe/stripe-js';
 
-// Material UI Icons
+ 
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
