@@ -12,14 +12,14 @@ import HomePage from './Screens/HomePage.jsx';
 import {PaymentCancel,PaymentSuccess} from './components/StripePaymentInfro.jsx'
 const LazyBusinessForm = lazy(() => import('./Screens/BusinessForm.jsx'));
 import Footer from './components/Footer.jsx'
-import { CircularProgress, Box } from '@mui/material';
+import { CircularProgress, Box ,Typography,Button} from '@mui/material';
 import AdminRoute from './lib/AdminRoute.jsx';
 import AdminLogin from '../src/components/AdminLoginPage.jsx'
 import AdminPanle from './components/AdminPanel.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// NotFound Page using MUI
+ 
 function NotFound() {
   return (
     <Box
