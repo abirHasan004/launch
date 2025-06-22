@@ -144,7 +144,7 @@ const LLCForm = () => {
             onChange={handleChange}
           >
             {usStatesWithPrices.map((stateName) => (
-              <MenuItem key={stateName} value={stateName}>
+              <MenuItem key={stateName} value={stateName.label}>
                 {stateName.label}
               </MenuItem>
             ))}
