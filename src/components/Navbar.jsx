@@ -19,12 +19,23 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  const menuItems = ['Home', 'Services', 'Pricing', 'Contact'];
+ 
+  const menuItems = [
+    { label: 'Home', url: '/' },
+    { label: 'Services', url: '/services' },
+    { label: 'Pricing', url: '/pricing' },
+    { label: 'Contact', url: '/contact' }
+  ];
+ 
+  const handleMenuItemClick = (url) => {
+    window.location.href = url;
+    handleMenuClose();
+  };
 
   return (
-    <Box display="flex" justifyContent="space-between"  alignItems="center" >
+    <Box display="flex" justifyContent="space-between" alignItems="center" >
       <Box display="flex" alignItems="center" gap={1}>
-        <img src={mainLogo} alt="Company Logo" />
+        <img onClick={()=>window.location.href='/'} src={mainLogo} alt="Company Logo" />
       </Box>
 
       <IconButton onClick={handleMenuClick}>
@@ -40,8 +51,11 @@ const Navbar = () => {
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
         {menuItems.map((item, index) => (
-          <MenuItem key={index} onClick={handleMenuClose}>
-            {item}
+          <MenuItem
+            key={index}
+            onClick={() => handleMenuItemClick(item.url)}
+          >
+            {item.label}
           </MenuItem>
         ))}
       </Menu>

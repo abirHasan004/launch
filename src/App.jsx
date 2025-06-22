@@ -18,6 +18,43 @@ import AdminLogin from '../src/components/AdminLoginPage.jsx'
 import AdminPanle from './components/AdminPanel.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+// NotFound Page using MUI
+function NotFound() {
+  return (
+    <Box
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bgcolor: '#f5f5f5',
+        textAlign: 'center',
+        p: 3,
+      }}
+    >
+      <Typography variant="h2" color="error" fontWeight="bold" gutterBottom>
+        404
+      </Typography>
+      <Typography variant="h5" gutterBottom>
+        Oops! Page Not Found
+      </Typography>
+      <Typography variant="body1" sx={{ mb: 3 }}>
+        The page you are looking for does not exist or has been moved.
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => (window.location.href = '/')}
+        sx={{ borderRadius: 3, px: 4 }}
+      >
+        Go to Home
+      </Button>
+    </Box>
+  );
+}
+
 const Loader = () => (
   <Box
     sx={{
@@ -69,13 +106,14 @@ const router = createBrowserRouter(
         }
       />
 
-      
       <Route path="/admin-login" element={<AdminLogin />} />
 
-     
       <Route element={<AdminRoute />}>
         <Route path="/admin-panel" element={<AdminPanle />} />
       </Route>
+
+      {/* NotFound Route */}
+      <Route path="*" element={<NotFound />} />
     </>
   )
 );
@@ -84,12 +122,12 @@ function App() {
   const [count, setCount] = useState(0);
   const queryClient = new QueryClient();
 
-  return(
+  return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <ToastContainer position="top-right" autoClose={3000} />
     </QueryClientProvider>
-  ) 
+  );
 }
 
 export default App;
