@@ -10,7 +10,7 @@ const AdminRoute = () => {
   useEffect(() => {
     const checkAdmin = async () => {
       try {
-        const { data } = await axios.get('/api/admin/me', {
+        const { data } = await axios.get('https://lauchbackend-31561078355.europe-west1.run.app/api/admin/me', {
           withCredentials: true,  
         });
 

@@ -75,7 +75,7 @@ export default function AdminLogin() {
 
     try {
       const res = await axios.post(
-        '/api/admin/signin',
+        'https://lauchbackend-31561078355.europe-west1.run.app/api/admin/signin',
         { email, password },
         { withCredentials: true } 
       );
@@ -99,7 +99,7 @@ export default function AdminLogin() {
       <Box
         sx={{
           flex: '1 1 58.333333%',
-          display: { xs: 'none', sm: 'flex' }, // Use flex to center the animation
+          display: { xs: 'none', sm: 'flex' },  
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: (t) =>
@@ -111,7 +111,7 @@ export default function AdminLogin() {
         <Lottie animationData={loginAnimation} loop={true} style={{ maxWidth: '600px' }} />
       </Box>
 
-      {/* Login Form Panel */}
+      
       <Box
         component={Paper}
         elevation={6}
