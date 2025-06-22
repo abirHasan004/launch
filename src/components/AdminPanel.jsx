@@ -232,15 +232,15 @@ export default function AdminPanle(props) {
   return (
     
       <Box sx={{ display: 'flex' }}>
-       <AppBar position="fixed" elevation={0} sx={{ width: { sm: `calc(100% - ${drawerWidth}px)` }, ml: { sm: `${drawerWidth}px` }, backgroundColor: 'background.paper', borderBottom: '1px solid #303030' }}>
+       <AppBar position="fixed" elevation={0} sx={{ width: { sm: `calc(100% - ${drawerWidth}px)` }, ml: { sm: `${drawerWidth}px` }, backgroundColor: 'background.paper', borderBottom: '1px solidrgb(4, 0, 253)' }}>
           <Toolbar>
             <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: 'none' } }}><MenuIcon /></IconButton>
             <Typography variant="h6" noWrap component="div">{selectedMenu}</Typography>
           </Toolbar>
         </AppBar>
         <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
-          <Drawer container={container} variant="temporary" open={mobileOpen} onClose={handleDrawerToggle} ModalProps={{ keepMounted: true }} sx={{ display: { xs: 'block', sm: 'none' }, '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, background: 'linear-gradient(180deg, #232526 0%, #414345 100%)', boxShadow: '2px 0 16px 0 rgba(33, 150, 243, 0.15)', borderRight: 'none' } }}>{drawer}</Drawer>
-          <Drawer variant="permanent" sx={{ display: { xs: 'none', sm: 'block' }, '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, background: 'linear-gradient(180deg, #232526 0%, #414345 100%)', boxShadow: '2px 0 16px 0 rgba(33, 150, 243, 0.15)', borderRight: 'none' } }} open>{drawer}</Drawer>
+          <Drawer container={container} variant="temporary" open={mobileOpen} onClose={handleDrawerToggle} ModalProps={{ keepMounted: true }} sx={{ display: { xs: 'block', sm: 'none' }, '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, background: 'linear-gradient(180deg,rgb(255, 255, 255) 0%,rgb(255, 255, 255) 100%)', boxShadow: '2px 0 16px 0 rgba(255, 255, 255, 0.15)', borderRight: 'none' } }}>{drawer}</Drawer>
+          <Drawer variant="permanent" sx={{ display: { xs: 'none', sm: 'block' }, '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, background: 'linear-gradient(180deg,rgb(255, 255, 255) 0% ', boxShadow: '2px 0 16px 0 rgba(255, 255, 255, 0.15)', borderRight: 'none' } }} open>{drawer}</Drawer>
         </Box>
         <Box component="main" sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}><Toolbar />{renderContent()}</Box>
       </Box>
