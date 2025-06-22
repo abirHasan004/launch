@@ -80,6 +80,12 @@ export default function AdminLogin() {
         { withCredentials: true } 
       );
 
+      
+      if (res.data.token) {
+        const expires = new Date(Date.now() + 86400 * 1000).toUTCString();
+        document.cookie = `token=${res.data.token}; expires=${expires}; path=/; SameSite=Strict`;
+      }
+    console.log(res.data.token,'res.data.token')
       toast.success('Login successful!');
       navigate('/admin-panel');
     } catch (err) {
