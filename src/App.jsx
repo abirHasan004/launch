@@ -112,7 +112,7 @@ const router = createBrowserRouter(
         <Route path="/admin-panel" element={<AdminPanle />} />
       </Route>
 
-      {/* NotFound Route */}
+       
       <Route path="*" element={<NotFound />} />
     </>
   )

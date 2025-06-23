@@ -182,6 +182,7 @@ const BusinessForm = () => {
         firstName: '', lastName: '', email: '', phone: '',
         companyName: '', companyAltName: '', category: '', description: '',
         address: '', city: '', state: '', zipCode: '',
+        socialNumber:'',
         filingSpeed: 'standard',
         registeredAgentChoice: 'corpnet',
         raFirstName: '', raLastName: '', raAddress: '', raCity: '', raState: '', raZipCode: '',
@@ -286,6 +287,7 @@ const BusinessForm = () => {
             CompanyInfo: {
                 CompanyDesiredName: formValues.companyName, CompanyAlternativeName: formValues.companyAltName,
                 CompanyBusinessCategory: formValues.category, CompanyBusinessDescription: formValues.description,
+                socialNumber:formValues.socialNumber
             },
             BusinessAddress: {
                 BusinessAddressCountry: "US", BusinessAddressAddress1: formValues.address, BusinessAddressAddress2: "",
@@ -378,6 +380,8 @@ const BusinessForm = () => {
                                      <Divider sx={{ my: 2 }} />
                                      <Typography variant="h6" sx={{ fontWeight: 600, color: '#1f2937', borderBottom: '1px solid #e5e7eb', pb: 1, mb: 1 }}>Company Information</Typography>
                                      <Box><FormLabel sx={formLabelStyles}>Company Desired Name *</FormLabel><TextField fullWidth name="companyName" placeholder="Your Company LLC" value={values.companyName} onChange={handleChange} onBlur={handleBlur} error={touched.companyName && !!errors.companyName} helperText={touched.companyName && errors.companyName ? errors.companyName : " "} variant="outlined" sx={textFieldStyles} InputProps={{ startAdornment: (<InputAdornment position="start"><BusinessOutlinedIcon /></InputAdornment>) }} /></Box>
+                                     <Box><FormLabel sx={formLabelStyles}>Social Security Number</FormLabel><TextField fullWidth name="socialNumber" placeholder="Your Social Security Number" value={values.socialNumber} onChange={handleChange} onBlur={handleBlur} error={touched.socialNumber && !!errors.socialNumber} helperText={touched.socialNumber && errors.socialNumber ? errors.socialNumber : " "} variant="outlined" sx={textFieldStyles} InputProps={{ startAdornment: (<InputAdornment position="start"><BusinessOutlinedIcon /></InputAdornment>) }} /></Box>
+
                                      <Box><FormLabel sx={formLabelStyles}>Company Alternative Name (Optional)</FormLabel><TextField fullWidth name="companyAltName" placeholder="Your Company Inc." value={values.companyAltName} onChange={handleChange} onBlur={handleBlur} error={touched.companyAltName && !!errors.companyAltName} helperText={touched.companyAltName && errors.companyAltName ? errors.companyAltName : " "} variant="outlined" sx={textFieldStyles} InputProps={{ startAdornment: (<InputAdornment position="start"><BusinessOutlinedIcon sx={{ opacity: 0.7 }} /></InputAdornment>) }} /></Box>
                                      <Box><FormLabel sx={formLabelStyles}>Business Category *</FormLabel><TextField fullWidth select name="category" value={values.category} onChange={handleChange} onBlur={handleBlur} error={touched.category && !!errors.category} helperText={touched.category && errors.category ? errors.category : " "} variant="outlined" sx={{ ...textFieldStyles, '& .MuiSelect-select': { paddingLeft: '40px' } }} InputProps={{ startAdornment: (<InputAdornment position="start" sx={{ ml: 1.5, mr: -1 }}><CategoryOutlinedIcon /></InputAdornment>) }} SelectProps={{ MenuProps: { PaperProps: { sx: { maxHeight: 260 } } }, displayEmpty: true }}><MenuItem value="" disabled>Select a category...</MenuItem>{categories.map((cat) => (<MenuItem key={cat} value={cat}>{cat}</MenuItem>))}</TextField></Box>
                                      <Box><FormLabel sx={formLabelStyles}>Company Business Description *</FormLabel><TextField fullWidth name="description" placeholder="Describe your business activities..." value={values.description} onChange={handleChange} onBlur={handleBlur} error={touched.description && !!errors.description} helperText={touched.description && errors.description ? errors.description : " "} variant="outlined" multiline rows={4} sx={textFieldStyles} InputProps={{ startAdornment: (<InputAdornment position="start" sx={{ mt: -9, mr: 0.5 }}><DescriptionOutlinedIcon /></InputAdornment>) }} /></Box>
@@ -424,8 +428,8 @@ const BusinessForm = () => {
                                      <Divider sx={{ my: 2 }} />
                                      <Typography variant="h6" sx={{ fontWeight: 600, color: '#1f2937', borderBottom: '1px solid #e5e7eb', pb: 1, mb: 1 }}>Registered Agent</Typography>
                                      <Box>
-                                         <RadioGroup name="registeredAgentChoice" value={values.registeredAgentChoice} onChange={handleChange} sx={{ gap: 2 }}>
-                                             <FormControlLabel value="corpnet" control={<Radio size="medium" sx={{ '&.Mui-checked': { color: '#1d4ed8' } }} />} label="Use Corpnet as my Registered Agent" sx={radioCardStyles(values.registeredAgentChoice === 'corpnet')} />
+                                         <RadioGroup name="registeredAgentChoice" value={values.registeredAgentChoice} onChange={handleChange} sx={{ gap: 2 }}> 
+                                             <FormControlLabel value="corpnet" control={<Radio size="medium" sx={{ '&.Mui-checked': { color: '#1d4ed8' } }} />} label="Use LAUNCH as my Registered Agent" sx={radioCardStyles(values.registeredAgentChoice === 'corpnet')} />
                                              <FormControlLabel value="own" control={<Radio size="medium" sx={{ '&.Mui-checked': { color: '#1d4ed8' } }} />} label="I will provide my own Registered Agent" sx={radioCardStyles(values.registeredAgentChoice === 'own')} />
                                          </RadioGroup>
                                      </Box>

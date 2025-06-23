@@ -31,7 +31,7 @@ const LLCForm = () => {
     { name: "Alaska", label: "Alaska-Standard $734.32" },
     { name: "Arizona", label: "Arizona-Standard $513.22" },
     { name: "Arkansas", label: "Arkansas-Standard $466.32" },
-    { name: "California", label: "CA-Standard $516.23" },
+    { name: "California", label: "California-Standard $516.23" },
     { name: "Colorado", label: "Colorado-Standard $439.52" },
     { name: "Connecticut", label: "Connecticut-Standard $598.98" },
     { name: "Delaware", label: "Delaware-Standard $709.9" },

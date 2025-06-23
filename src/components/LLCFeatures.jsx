@@ -128,7 +128,7 @@ const LLCFeaturesSection = () => {
             sm: 'repeat(2, 1fr)',
             md: 'repeat(3, 1fr)',
           },
-          gap: { xs: 3, md: 4 }, // Ensures spacing between cards
+          gap: { xs: 3, md: 4 },  
         }}
       >
         {featuresData.map((feature, index) => (
@@ -143,7 +143,7 @@ const LLCFeaturesSection = () => {
               flexDirection: 'column',
               alignItems: 'center',
               textAlign: 'center',
-              // Hover effect removed
+               
             }}
           >
             <Box mb={2.5}>{feature.icon}</Box>
@@ -167,7 +167,7 @@ const LLCFeaturesSection = () => {
             </Typography>
 
             <MuiLink
-              href={feature.ctaLink}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               underline="none"
               sx={{
                 color: '#ff6b6b',
@@ -179,12 +179,10 @@ const LLCFeaturesSection = () => {
                   color: '#ff8b8b',
                   textDecoration: 'underline',
                 },
-                mt: 'auto',
-                pt: 1,
-              }}
+               }}
             >
               {feature.cta}
-              <span style={{ marginLeft: '8px', fontSize: '1.1rem', lineHeight: 1 }}>&rarr;</span>
+              <span style={{ marginLeft: '8px', fontSize: '0.8rem', lineHeight: 1 }}>&rarr;</span>
             </MuiLink>
           </Box>
         ))}

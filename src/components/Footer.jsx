@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, Link, IconButton, Grid, Divider, Button } from '@mui/material';
+import mainLogo from '../../public/mainlogo-3-2.png';
 
 // Inline SVG Icons
 const FaMapMarkerAlt = ({ color = "#ff6b6b", size = 20 }) => (
@@ -65,7 +66,8 @@ const Footer = () => {
           {/* Column 1: Logo and Address */}
           <Grid item xs={12} md={4}>
             <Box sx={{ mb: 2 }}>
-              <ALaunchLogo />
+            <img onClick={()=>window.location.href='/'} src={mainLogo} alt="Company Logo" />
+
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
               <FaMapMarkerAlt /> {/* Using inline SVG */}

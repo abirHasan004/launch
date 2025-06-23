@@ -44,7 +44,7 @@ const TestimonialCarousel = () => {
               <Typography variant="h6" fontWeight="bold" mb={1}>
                 {testimonial.name}
               </Typography>
-              <Typography variant="body1" sx={{ fontSize: '1rem', color: '#333' }}>
+              <Typography variant="body1" sx={{ fontSize: '0.8rem', color: '#333' }}>
                 {testimonial.text}
               </Typography>
             </Box>
