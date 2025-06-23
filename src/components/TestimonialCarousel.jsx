@@ -10,7 +10,7 @@ import { AiFillStar } from 'react-icons/ai';
 const testimonials = [
   {
     name: 'Sarah T.',
-    text: `Starting my bakery LLC felt overwhelming—paperwork, legal jargon, you name it. Launch My Biz made it dead simple. Their step-by-step guide and affordable pricing saved me from pricey lawyers. I had my LLC filed in days, not weeks, and no headaches. If you're stressed about forming an LLC, these guys are a game-changer. Highly recommend!`
+    text: `Launch My Biz made forming my LLC so easy and affordable. No stress, no hassle—highly recommend!`
   },
   {
     name: 'David M.',
