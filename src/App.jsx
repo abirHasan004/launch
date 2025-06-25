@@ -6,6 +6,7 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HelmetProvider } from 'react-helmet-async';
 
 import './App.css';
 import HomePage from './Screens/HomePage.jsx';
@@ -123,10 +124,12 @@ function App() {
   const queryClient = new QueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <ToastContainer position="top-right" autoClose={3000} />
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ToastContainer position="top-right" autoClose={3000} />
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 }
 
