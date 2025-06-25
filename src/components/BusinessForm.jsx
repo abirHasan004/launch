@@ -191,7 +191,7 @@ const BusinessForm = () => {
         ],
     };
 
-    const stripePromise = loadStripe('pk_test_51OSP8aDveVeGQ2eWXx6zkeKcL3tXCaUn6qjpUA04ZUQ8uKHkm0JdXcRvRcv0haXiOsp19mNJBBXviwJjJzTuCzcp00Mv1xtSm8');
+    const stripePromise = loadStripe('pk_live_51Mm095LJEsvKrI06Iwzg7W8meWpywwViUZnfHJx5Fo6GRt6ttf23SsjBwpwcUl3XyLrZYaQG6woAHHcOsXLBAnmV00KmXaxXjH');
 
     const handleFormSubmit = async (values) => {
         setIsFetchingPackages(true);
