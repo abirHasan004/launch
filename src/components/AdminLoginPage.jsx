@@ -75,7 +75,7 @@ export default function AdminLogin() {
 
     try {
       const res = await axios.post(
-        'https://lauchbackend-31561078355.europe-west1.run.app/api/admin/signin',
+        'https://lauchbackend-896056687002.europe-west1.run.app/api/admin/signin',
         { email, password },
         { withCredentials: true } 
       );
