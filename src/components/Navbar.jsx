@@ -6,7 +6,6 @@ import {
   MenuItem
 } from '@mui/material';
 import { FiMenu } from 'react-icons/fi';
-import mainLogo from '../../public/mainlogo-3-2.png';
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -35,7 +34,7 @@ const Navbar = () => {
   return (
     <Box display="flex" justifyContent="space-between" alignItems="center" >
       <Box display="flex" alignItems="center" gap={1}>
-        <img onClick={()=>window.location.href='/'} src={mainLogo} alt="Company Logo" />
+        <img onClick={()=>window.location.href='/'} src="/mainlogo-3-2.png" alt="Company Logo" style={{ height: 48, width: 'auto', cursor: 'pointer' }} />
       </Box>
 
       <IconButton onClick={handleMenuClick}>

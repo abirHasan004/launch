@@ -15,6 +15,7 @@ import {
 import { format } from 'date-fns';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const theme = createTheme({
   palette: {
@@ -230,7 +231,16 @@ export default function AdminPanle(props) {
   }
 
   return (
-    
+    <>
+      <Helmet>
+        <title>Admin Panel | LaunchMyBiz</title>
+        <meta name="description" content="Admin dashboard for LaunchMyBiz. Manage business orders, users, and settings." />
+        <meta property="og:title" content="Admin Panel | LaunchMyBiz" />
+        <meta property="og:description" content="Admin dashboard for LaunchMyBiz. Manage business orders, users, and settings." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.launchmybiz.net/admin-panel" />
+        <meta property="og:image" content="https://www.launchmybiz.net/mainlogo-3-2.png" />
+      </Helmet>
       <Box sx={{ display: 'flex' }}>
        <AppBar position="fixed" elevation={0} sx={{ width: { sm: `calc(100% - ${drawerWidth}px)` }, ml: { sm: `${drawerWidth}px` }, backgroundColor: 'background.paper', borderBottom: '1px solidrgb(4, 0, 253)' }}>
           <Toolbar>
@@ -244,6 +254,6 @@ export default function AdminPanle(props) {
         </Box>
         <Box component="main" sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}><Toolbar />{renderContent()}</Box>
       </Box>
- 
+    </>
   );
 }

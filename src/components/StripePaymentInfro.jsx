@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Paper,IconButton , Typography, Button,Menu,MenuItem, Icon, CircularProgress } from '@mui/material';
- // --- Import MUI Icons ---
+// --- Import MUI Icons ---
 // Success Icon
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 // Failure/Cancel Icon
@@ -11,6 +11,8 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { FaRocket } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
 export const PaymentSuccess = ({}) => {
     const [sessionId, setSessionId] = useState(null);
     const [state, setState] = React.useState('');
@@ -36,7 +38,17 @@ export const PaymentSuccess = ({}) => {
     const menuItems = ['Home', 'Services', 'Pricing', 'Contact'];
 
     return (
-        <Box
+        <>
+          <Helmet>
+            <title>Payment Successful | LaunchMyBiz</title>
+            <meta name="description" content="Your payment was successful. Thank you for registering your business with LaunchMyBiz." />
+            <meta property="og:title" content="Payment Successful | LaunchMyBiz" />
+            <meta property="og:description" content="Your payment was successful. Thank you for registering your business with LaunchMyBiz." />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://www.launchmybiz.net/success" />
+            <meta property="og:image" content="https://www.launchmybiz.net/mainlogo-3-2.png" />
+          </Helmet>
+          <Box
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -104,6 +116,7 @@ export const PaymentSuccess = ({}) => {
                 </Button>
             </Paper>
         </Box>
+      </>
     );
 };
 
@@ -111,7 +124,17 @@ export const PaymentSuccess = ({}) => {
 // --- Failure/Cancel Page Component ---
 export const PaymentCancel = ({ setPath }) => {
     return (
-        <Box
+        <>
+          <Helmet>
+            <title>Payment Canceled | LaunchMyBiz</title>
+            <meta name="description" content="Your payment was canceled. Please try again to complete your business registration." />
+            <meta property="og:title" content="Payment Canceled | LaunchMyBiz" />
+            <meta property="og:description" content="Your payment was canceled. Please try again to complete your business registration." />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://www.launchmybiz.net/cancel" />
+            <meta property="og:image" content="https://www.launchmybiz.net/mainlogo-3-2.png" />
+          </Helmet>
+          <Box
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -166,6 +189,7 @@ export const PaymentCancel = ({ setPath }) => {
                 </Button>
             </Paper>
         </Box>
+      </>
     );
 };
 

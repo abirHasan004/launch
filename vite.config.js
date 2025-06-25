@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'hhttps://lauchbackend-896056687002.europe-west1.run.app',  
+        target: 'https://lauchbackend-896056687002.europe-west1.run.app',  
         changeOrigin: true,
         secure: false,
       },
