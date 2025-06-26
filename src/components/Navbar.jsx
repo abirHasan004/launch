@@ -12,21 +12,35 @@ const Navbar = () => {
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
-  };
+}
 
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
- 
   const menuItems = [
     { label: 'Home', url: '/' },
-    { label: 'Services', url: '/services' },
-    { label: 'Pricing', url: '/pricing' },
-    { label: 'Contact', url: '/contact' }
+
+    { label: 'Admin Login', url: '/admin-login' },
+    { label: 'Contact Us', url: '/contact' }
   ];
- 
+  const companyInfo = {
+    email: 'customercare@launchmybiz.net',
+    phone: '+1 (530) 625-8265',
+    };
+
   const handleMenuItemClick = (url) => {
+    if (url === '/contact') {
+      // If already on homepage, scroll to footer
+    
+        const footer = document.getElementById('footer-contact');
+        if (footer) {
+          footer.scrollIntoView({ behavior: 'smooth' });
+        }
+      
+      handleMenuClose();
+      return;
+    }
     window.location.href = url;
     handleMenuClose();
   };
@@ -41,7 +55,6 @@ const Navbar = () => {
         <FiMenu size={24} />
       </IconButton>
 
-      {/* Dropdown Menu */}
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -49,7 +62,7 @@ const Navbar = () => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        {menuItems.map((item, index) => (
+      {menuItems.map((item, index) => (
           <MenuItem
             key={index}
             onClick={() => handleMenuItemClick(item.url)}
@@ -57,6 +70,13 @@ const Navbar = () => {
             {item.label}
           </MenuItem>
         ))}
+        {/* <Box sx={{ p: 2, borderTop: '1px solid #eee', mt: 1 }}>
+          <div style={{ fontSize: 13, color: '#888' }}>
+            <div><strong>Email:</strong> {companyInfo.email}</div>
+            <div><strong>Phone:</strong> {companyInfo.phone}</div>
+            <div><strong>Address:</strong> {companyInfo.address}</div>
+          </div>
+        </Box> */}
       </Menu>
     </Box>
   );

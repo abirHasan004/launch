@@ -72,7 +72,7 @@ const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email format').required('Email is required'),
     phone: Yup.string().matches(/^[0-9]{10,15}$/, 'Phone number must be 10-15 digits').required('Phone is required'),
     companyName: Yup.string().trim().required('Company desired name is required'),
-    companyAltName: Yup.string().trim(),
+    companyAltName: Yup.string().trim().required('Company Alt name is required'),
     category: Yup.string().required('Business category is required'),
     description: Yup.string().trim().min(10, 'Description too short (min 10 chars)').required('Company description is required'),
     address: Yup.string().trim().required('Business address is required'),
@@ -103,7 +103,6 @@ const validationSchema = Yup.object().shape({
     ).min(1, 'At least one company participant is required.').required(),
 });
 
-// --- Package Selection Modal Component ---
 const PackageModal = ({ open, onClose, packages, onContinue, apiError }) => {
     const [selectedPackageId, setSelectedPackageId] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -187,7 +186,7 @@ const BusinessForm = () => {
         registeredAgentChoice: 'corpnet',
         raFirstName: '', raLastName: '', raAddress: '', raCity: '', raState: '', raZipCode: '',
         participants: [
-            { firstName: '', middleInitial: '', lastName: '', titles: [], address: '', city: '', state: '', zipCode: '', ownership: '', isSigner: false }
+            { firstName: '', middleInitial: '', lastName: '', titles: [], address: '', city: '', state: '', zipCode: '', ownership: '', isSigner: false,socialNumber:'' }
         ],
     };
 
@@ -287,7 +286,7 @@ const BusinessForm = () => {
             CompanyInfo: {
                 CompanyDesiredName: formValues.companyName, CompanyAlternativeName: formValues.companyAltName,
                 CompanyBusinessCategory: formValues.category, CompanyBusinessDescription: formValues.description,
-                socialNumber:formValues.socialNumber
+           
             },
             BusinessAddress: {
                 BusinessAddressCountry: "US", BusinessAddressAddress1: formValues.address, BusinessAddressAddress2: "",
@@ -312,8 +311,9 @@ const BusinessForm = () => {
                 },
                 OwnershipPercentage: p.ownership,
                 IsAuthorizedSigner: p.isSigner,
+                socialNumber:p.socialNumber
             })),
-             // Use the transformed package data
+              
             selectedPackage: { 
                 id: selectedPackage.id, 
                 name: selectedPackage.name, 
@@ -380,9 +380,8 @@ const BusinessForm = () => {
                                      <Divider sx={{ my: 2 }} />
                                      <Typography variant="h6" sx={{ fontWeight: 600, color: '#1f2937', borderBottom: '1px solid #e5e7eb', pb: 1, mb: 1 }}>Company Information</Typography>
                                      <Box><FormLabel sx={formLabelStyles}>Company Desired Name *</FormLabel><TextField fullWidth name="companyName" placeholder="Your Company LLC" value={values.companyName} onChange={handleChange} onBlur={handleBlur} error={touched.companyName && !!errors.companyName} helperText={touched.companyName && errors.companyName ? errors.companyName : " "} variant="outlined" sx={textFieldStyles} InputProps={{ startAdornment: (<InputAdornment position="start"><BusinessOutlinedIcon /></InputAdornment>) }} /></Box>
-                                     <Box><FormLabel sx={formLabelStyles}>Social Security Number</FormLabel><TextField fullWidth name="socialNumber" placeholder="Your Social Security Number" value={values.socialNumber} onChange={handleChange} onBlur={handleBlur} error={touched.socialNumber && !!errors.socialNumber} helperText={touched.socialNumber && errors.socialNumber ? errors.socialNumber : " "} variant="outlined" sx={textFieldStyles} InputProps={{ startAdornment: (<InputAdornment position="start"><BusinessOutlinedIcon /></InputAdornment>) }} /></Box>
-
-                                     <Box><FormLabel sx={formLabelStyles}>Company Alternative Name (Optional)</FormLabel><TextField fullWidth name="companyAltName" placeholder="Your Company Inc." value={values.companyAltName} onChange={handleChange} onBlur={handleBlur} error={touched.companyAltName && !!errors.companyAltName} helperText={touched.companyAltName && errors.companyAltName ? errors.companyAltName : " "} variant="outlined" sx={textFieldStyles} InputProps={{ startAdornment: (<InputAdornment position="start"><BusinessOutlinedIcon sx={{ opacity: 0.7 }} /></InputAdornment>) }} /></Box>
+ 
+                                     <Box><FormLabel sx={formLabelStyles}>Company Alternative Name *</FormLabel><TextField fullWidth name="companyAltName" placeholder="Your Company Inc." value={values.companyAltName} onChange={handleChange} onBlur={handleBlur} error={touched.companyAltName && !!errors.companyAltName} helperText={touched.companyAltName && errors.companyAltName ? errors.companyAltName : " "} variant="outlined" sx={textFieldStyles} InputProps={{ startAdornment: (<InputAdornment position="start"><BusinessOutlinedIcon sx={{ opacity: 0.7 }} /></InputAdornment>) }} /></Box>
                                      <Box><FormLabel sx={formLabelStyles}>Business Category *</FormLabel><TextField fullWidth select name="category" value={values.category} onChange={handleChange} onBlur={handleBlur} error={touched.category && !!errors.category} helperText={touched.category && errors.category ? errors.category : " "} variant="outlined" sx={{ ...textFieldStyles, '& .MuiSelect-select': { paddingLeft: '40px' } }} InputProps={{ startAdornment: (<InputAdornment position="start" sx={{ ml: 1.5, mr: -1 }}><CategoryOutlinedIcon /></InputAdornment>) }} SelectProps={{ MenuProps: { PaperProps: { sx: { maxHeight: 260 } } }, displayEmpty: true }}><MenuItem value="" disabled>Select a category...</MenuItem>{categories.map((cat) => (<MenuItem key={cat} value={cat}>{cat}</MenuItem>))}</TextField></Box>
                                      <Box><FormLabel sx={formLabelStyles}>Company Business Description *</FormLabel><TextField fullWidth name="description" placeholder="Describe your business activities..." value={values.description} onChange={handleChange} onBlur={handleBlur} error={touched.description && !!errors.description} helperText={touched.description && errors.description ? errors.description : " "} variant="outlined" multiline rows={4} sx={textFieldStyles} InputProps={{ startAdornment: (<InputAdornment position="start" sx={{ mt: -9, mr: 0.5 }}><DescriptionOutlinedIcon /></InputAdornment>) }} /></Box>
                                      
@@ -410,13 +409,16 @@ const BusinessForm = () => {
                                                      <Typography variant="subtitle1" fontWeight="600" sx={{mb: 2}}>Participant #{index + 1}</Typography>
                                                      <IconButton onClick={() => values.participants.length > 1 && remove(index)} sx={{ position: 'absolute', top: 8, right: 8 }} disabled={values.participants.length <= 1}><DeleteIcon /></IconButton>
                                                      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2.5 }}>
-                                                         <Box sx={{gridColumn: '1 / -1'}}><FormLabel sx={formLabelStyles}>Full Name *</FormLabel><Box sx={{display: 'flex', gap: 2}}><TextField fullWidth name={`participants.${index}.firstName`} placeholder="First Name" value={participant.firstName} onChange={handleChange} onBlur={handleBlur} error={participantTouched.firstName && !!participantErrors.firstName} helperText={participantTouched.firstName && participantErrors.firstName ? participantErrors.firstName : " "} sx={textFieldStyles} /><TextField sx={{...textFieldStyles, width: '100px'}} name={`participants.${index}.middleInitial`} placeholder="Initial" value={participant.middleInitial} onChange={handleChange} onBlur={handleBlur} error={participantTouched.middleInitial && !!participantErrors.middleInitial} helperText={participantTouched.middleInitial && participantErrors.middleInitial ? participantErrors.middleInitial : " "} /><TextField fullWidth name={`participants.${index}.lastName`} placeholder="Last Name" value={participant.lastName} onChange={handleChange} onBlur={handleBlur} error={participantTouched.lastName && !!participantErrors.lastName} helperText={participantTouched.lastName && participantErrors.lastName ? participantErrors.lastName : " "} sx={textFieldStyles} /></Box></Box>
+                                                         <Box sx={{gridColumn: '1 / -1'}}><FormLabel sx={formLabelStyles}>Full Name *</FormLabel><Box sx={{display: 'flex', gap: 2}}><TextField fullWidth name={`participants.${index}.firstName`} placeholder="First Name" value={participant.firstName} onChange={handleChange} onBlur={handleBlur} error={participantTouched.firstName && !!participantErrors.firstName} helperText={participantTouched.firstName && participantErrors.firstName ? participantErrors.firstName : " "} sx={textFieldStyles} /> 
+                                                         <TextField fullWidth name={`participants.${index}.lastName`} placeholder="Last Name" value={participant.lastName} onChange={handleChange} onBlur={handleBlur} error={participantTouched.lastName && !!participantErrors.lastName} helperText={participantTouched.lastName && participantErrors.lastName ? participantErrors.lastName : " "} sx={textFieldStyles} /></Box></Box>
                                                          <Box sx={{gridColumn: '1 / -1'}}><FormLabel sx={formLabelStyles}>Title(s) *</FormLabel><FormControl fullWidth error={participantTouched.titles && !!participantErrors.titles}><Select multiple name={`participants.${index}.titles`} value={participant.titles} onChange={handleChange} input={<OutlinedInput sx={{...textFieldStyles, p:0, '& .MuiOutlinedInput-input': { p: '16.5px 14px'}}} />} renderValue={(selected) => (<Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>{selected.map((value) => (<Chip key={value} label={value} />))}</Box>)} MenuProps={{ PaperProps: { sx: { maxHeight: 224 } } }}>{participantTitles.map((title) => (<MenuItem key={title} value={title}>{title}</MenuItem>))}</Select>{participantTouched.titles && participantErrors.titles && <Typography color="error" variant="caption">{participantErrors.titles}</Typography>}</FormControl></Box>
                                                          <Box sx={{gridColumn: '1 / -1'}}><FormLabel sx={formLabelStyles}>Mailing Address *</FormLabel><TextField fullWidth name={`participants.${index}.address`} placeholder="Street Address" value={participant.address} onChange={handleChange} onBlur={handleBlur} error={participantTouched.address && !!participantErrors.address} helperText={participantTouched.address && participantErrors.address ? participantErrors.address : " "} sx={textFieldStyles} /></Box>
                                                          <Box><FormLabel sx={formLabelStyles}>City *</FormLabel><TextField fullWidth name={`participants.${index}.city`} placeholder="City" value={participant.city} onChange={handleChange} onBlur={handleBlur} error={participantTouched.city && !!participantErrors.city} helperText={participantTouched.city && participantErrors.city ? participantErrors.city : " "} sx={textFieldStyles} /></Box>
                                                          <Box><FormLabel sx={formLabelStyles}>State *</FormLabel><TextField fullWidth select name={`participants.${index}.state`} value={participant.state} onChange={handleChange} onBlur={handleBlur} error={participantTouched.state && !!participantErrors.state} helperText={participantTouched.state && participantErrors.state ? participantErrors.state : " "} sx={{ ...textFieldStyles, '& .MuiSelect-select': { paddingLeft: '14px' } }} SelectProps={{ MenuProps: { PaperProps: { sx: { maxHeight: 260 } } }, displayEmpty: true }}><MenuItem value="" disabled>Select state...</MenuItem>{stateOptions.map((state) => (<MenuItem key={state} value={state}>{state}</MenuItem>))}</TextField></Box>
                                                          <Box><FormLabel sx={formLabelStyles}>Zip Code *</FormLabel><TextField fullWidth name={`participants.${index}.zipCode`} placeholder="Zip Code" value={participant.zipCode} onChange={handleChange} onBlur={handleBlur} error={participantTouched.zipCode && !!participantErrors.zipCode} helperText={participantTouched.zipCode && participantErrors.zipCode ? participantErrors.zipCode : " "} sx={textFieldStyles} /></Box>
                                                          <Box><FormLabel sx={formLabelStyles}>Percentage of Ownership *</FormLabel><TextField fullWidth name={`participants.${index}.ownership`} type="number" placeholder="%" value={participant.ownership} onChange={handleChange} onBlur={handleBlur} error={participantTouched.ownership && !!participantErrors.ownership} helperText={participantTouched.ownership && participantErrors.ownership ? participantErrors.ownership : " "} sx={textFieldStyles} InputProps={{ startAdornment: (<InputAdornment position="start"><PercentIcon /></InputAdornment>) }} /></Box>
+                                                         <Box><FormLabel sx={formLabelStyles}>Social Security Number</FormLabel><TextField fullWidth name={`participants.${index}.socialNumber`} placeholder="Owner Social Security Number" value={participant.socialNumber} onChange={handleChange} onBlur={handleBlur} error={participantTouched.socialNumber && !!participantErrors.socialNumber} helperText={participantTouched.socialNumber && participantErrors.socialNumber ? participantErrors.socialNumber : " "} variant="outlined" sx={textFieldStyles} InputProps={{ startAdornment: (<InputAdornment position="start"><BusinessOutlinedIcon /></InputAdornment>) }} /></Box>
+
                                                          <FormControlLabel control={<Field as={Checkbox} type="checkbox" name={`participants.${index}.isSigner`} checked={participant.isSigner} />} label="Authorized Signer" sx={{gridColumn: '1 / -1', mt: 1}}/>
                                                      </Box>
                                                  </Paper>
@@ -457,7 +459,7 @@ const BusinessForm = () => {
                                      
                                      <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
                                          <Button type="submit" variant="contained" disabled={isFetchingPackages} size="large" sx={{ bgcolor: '#1d4ed8', color: 'white', textTransform: 'none', fontWeight: '600', p: '12px 36px', borderRadius: '10px', fontSize: '1rem', minWidth: '240px', boxShadow: '0 4px 10px -2px rgba(29,78,216,0.3)', '&:hover': { bgcolor: '#1e40af', boxShadow: '0 6px 14px -3px rgba(29,78,216,0.35)', transform: 'translateY(-1px)' } }}>
-                                             {isFetchingPackages ? <CircularProgress size={24} color="inherit" /> : 'Select Package & Continue'}
+                                             {isFetchingPackages ? <CircularProgress size={24} color="inherit" /> : 'SUBMIT'}
                                          </Button>
                                      </Box>
                                  </Box>
