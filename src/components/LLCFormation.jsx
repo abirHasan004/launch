@@ -102,7 +102,7 @@ const LLCForm = () => {
         {/* Left Image */}
         <Grid item xs={12} md={5}>
           <img
-            src="https://www.tailorbrands.com/wp-content/uploads/2021/12/Header-Types-of-LLCs.jpeg"
+            src="/WhatsApp Image 2025-06-28 at 22.25.08_e5fa2feb.jpg"
             alt="People"
             style={{ width: '100%', borderRadius: 10 }}
           />
